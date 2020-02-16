@@ -23,17 +23,19 @@ require 'rails_helper'
 # removed from Rails core in Rails 5, but can be added back in via the
 # `rails-controller-testing` gem.
 
-RSpec.describe ProductsController, type: :controller do
+RSpec.describe Api::V1::ProductsController, type: :controller do
 
   # This should return the minimal set of attributes required to create a valid
   # Product. As you add validations to Product, be sure to
   # adjust the attributes here as well.
-  let(:valid_attributes) {
-    skip("Add a hash of attributes valid for your model")
+  valid_attributes = {
+    name: 'Test Product 1',
+    price: 10.0
   }
 
-  let(:invalid_attributes) {
-    skip("Add a hash of attributes invalid for your model")
+  invalid_attributes = {
+    name: 'Test Product 1',
+    price: -10.0
   }
 
   # This should return the minimal set of values that should be in the session
@@ -68,8 +70,8 @@ RSpec.describe ProductsController, type: :controller do
       it "renders a JSON response with the new product" do
         post :create, params: {product: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:created)
-        expect(response.content_type).to eq('application/json')
-        expect(response.location).to eq(product_url(Product.last))
+        expect(response.content_type).to eq('application/json; charset=utf-8')
+        expect(response.location).to eq(api_v1_product_url(Product.last))
       end
     end
 
@@ -77,29 +79,31 @@ RSpec.describe ProductsController, type: :controller do
       it "renders a JSON response with errors for the new product" do
         post :create, params: {product: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
   end
 
   describe "PUT #update" do
     context "with valid params" do
-      let(:new_attributes) {
-        skip("Add a hash of attributes valid for your model")
+      new_attributes = {
+        name: 'Test Product 1',
+        price: 24.0
       }
 
       it "updates the requested product" do
         product = Product.create! valid_attributes
         put :update, params: {id: product.to_param, product: new_attributes}, session: valid_session
         product.reload
-        skip("Add assertions for updated state")
+        expect(response).to have_http_status(:ok)
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
 
       it "renders a JSON response with the product" do
         product = Product.create! valid_attributes
         put :update, params: {id: product.to_param, product: valid_attributes}, session: valid_session
         expect(response).to have_http_status(:ok)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
 
@@ -108,7 +112,7 @@ RSpec.describe ProductsController, type: :controller do
         product = Product.create! valid_attributes
         put :update, params: {id: product.to_param, product: invalid_attributes}, session: valid_session
         expect(response).to have_http_status(:unprocessable_entity)
-        expect(response.content_type).to eq('application/json')
+        expect(response.content_type).to eq('application/json; charset=utf-8')
       end
     end
   end

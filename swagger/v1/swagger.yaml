@@ -1,0 +1,138 @@
+---
+swagger: '2.0'
+info:
+  title: API V1
+  version: v1
+paths:
+  "/api/v1/products":
+    get:
+      summary: List all products
+      tags:
+      - Products
+      responses:
+        '200':
+          description: products found
+    post:
+      summary: Creates a product
+      tags:
+      - Products
+      parameters:
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Product Test 1
+            price:
+              type: number
+              format: float
+              description: A positive number
+              example: 10.0
+          required:
+          - name
+          - price
+      responses:
+        '201':
+          description: product created
+        '422':
+          description: invalid request
+  "/api/v1/products/{id}":
+    get:
+      summary: Retrieves a product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: product found
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              price:
+                type: number
+                format: float
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - name
+            - price
+            - created_at
+            - updated_at
+    put:
+      summary: Updates a product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: product
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Product Updated Test 1
+            price:
+              type: number
+              format: float
+              description: A positive number
+              example: 20.0
+          required: []
+      responses:
+        '200':
+          description: product updated
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              price:
+                type: number
+                format: float
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - name
+            - price
+            - created_at
+            - updated_at
+    delete:
+      summary: Deletes a product
+      tags:
+      - Products
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: product deleted
+consumes:
+- application/json
+produces:
+- application/json
