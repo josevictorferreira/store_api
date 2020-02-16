@@ -130,8 +130,130 @@ paths:
           type: integer
         required: true
       responses:
-        '200':
+        '204':
           description: product deleted
+  "/api/v1/stores":
+    get:
+      summary: List all stores
+      tags:
+      - Stores
+      responses:
+        '200':
+          description: stores found
+    post:
+      summary: Creates a store
+      tags:
+      - Stores
+      parameters:
+      - name: store
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Store Test 1
+            address:
+              type: string
+              example: Road Test
+          required:
+          - name
+          - address
+      responses:
+        '201':
+          description: store created
+        '422':
+          description: invalid request
+  "/api/v1/stores/{id}":
+    get:
+      summary: Retrieves a store
+      tags:
+      - Stores
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: store found
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: stirng
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - name
+            - address
+            - created_at
+            - updated_at
+    put:
+      summary: Updates a store
+      tags:
+      - Stores
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: store
+        in: body
+        schema:
+          type: object
+          properties:
+            name:
+              type: string
+              example: Store Updated Test 1
+            address:
+              type: string
+              example: Road Test
+          required: []
+      responses:
+        '200':
+          description: store updated
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              name:
+                type: string
+              address:
+                type: string
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - name
+            - address
+            - created_at
+            - updated_at
+    delete:
+      summary: Deletes a store
+      tags:
+      - Stores
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '204':
+          description: store deleted
 consumes:
 - application/json
 produces:
