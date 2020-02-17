@@ -83,7 +83,7 @@ test:
 #
 production:
   <<: *default
-  database: store_api_production
+  database: <%= ENV.fetch("POSTGRES_DATABASE") { "store_api_production" } %>
   host: <%= ENV.fetch("POSTGRES_HOST") { "localhost" } %>
   username: <%= ENV.fetch("POSTGRES_USER") { 'postgres' } %>
   password: <%= ENV.fetch("POSTGRES_PASSWORD") { 'postgres' } %>
