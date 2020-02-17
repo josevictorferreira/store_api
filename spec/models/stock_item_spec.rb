@@ -39,6 +39,12 @@ RSpec.describe StockItem, type: :model do
       item = StockItem.new(product: @product, store: @store, items: -1)
       expect(item).to be_invalid
     end
+
+    it 'should be invalid when already have a stock item with the same store and product' do
+      StockItem.create(product: @product, store: @store, items: -1)
+      item = StockItem.new(product: @product, store: @store, items: -1)
+      expect(item).to be_invalid
+    end
   end
 
   describe "Add Stock Item" do
