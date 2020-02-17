@@ -20,5 +20,5 @@ Pequena API para gerenciar o estoque de produtos de uma ou várias lojas.
 
 ### To Do
 
-  - [ ] Aprimorar a funcionalidade de adicionar e remove itens do estoque, cenário de concorrência.
+  - [ ] Aprimorar a funcionalidade de adicionar e remover itens do estoque, cenário de concorrência.
   - [ ] Melhorar a descrição dos métodos no swagger.
