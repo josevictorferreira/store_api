@@ -3,6 +3,7 @@ class StockItem < ApplicationRecord
   belongs_to :store
   validates_presence_of :product, :store
   validates :items, numericality: { greater_than_or_equal_to: 0 }
+  validates :product, uniqueness: { scope: :store }
 
   def add_stock_item(number)
     if number.positive?
