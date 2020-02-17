@@ -55,7 +55,7 @@ RSpec.describe StockItem, type: :model do
     context 'with valid number of items' do
       it 'should save and update the number of items for the stock item' do
         @stock_item.add_stock_item(3)
-        expect(@stock_item).to be_valid
+        expect(@stock_item).to be_truthy
         expect(@stock_item.items).to be_equal(6)
       end
     end
@@ -75,15 +75,14 @@ RSpec.describe StockItem, type: :model do
     context 'with valid number of items' do
       it 'should save and update the number of items for the stock item' do
         @stock_item.remove_stock_item(3)
-        expect(@stock_item).to be_valid
+        expect(@stock_item).to be_truthy
         expect(@stock_item.items).to be_equal(0)
       end
     end
 
     context 'with invalid number of items' do
       it 'should not update the number of items when the number to be removed is larger than the actual stock' do
-        @stock_item.remove_stock_item(5)
-        expect(@stock_item).to be_invalid
+        expect{@stock_item.remove_stock_item(5)}.to raise_exception(ActiveRecord::RecordInvalid)
       end
 
       it 'raise exception when the argument is a negative number' do

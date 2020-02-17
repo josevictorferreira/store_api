@@ -30,25 +30,20 @@ module Api
 
       def add_items
         @stock_item.add_stock_item(change_stock_item_param[:items].to_i)
-        if @stock_item.save
-          render json: @stock_item, status: :ok
-        else
-          render json: @stock_item.errors, status: :unprocessable_entity
-        end
+        render json: @stock_item, status: :ok
+      rescue ActiveRecord::RecordInvalid => er
+        render json: { message: er.message }, status: :unprocessable_entity
       rescue ArgumentError => e
         render json: { message: e.message }, status: :unprocessable_entity
       rescue StandardError => ex
-        puts e.message
         render json: { message: ex.message }, status: :unprocessable_entity
       end
 
       def remove_items
         @stock_item.remove_stock_item(change_stock_item_param[:items].to_i)
-        if @stock_item.save
-          render json: @stock_item, status: :ok
-        else
-          render json: @stock_item.errors, status: :unprocessable_entity
-        end
+        render json: @stock_item, status: :ok
+      rescue ActiveRecord::RecordInvalid => er
+        render json: { message: er.message }, status: :unprocessable_entity
       rescue ArgumentError => e
         render json: { message: e.message }, status: :unprocessable_entity
       rescue StandardError => ex
