@@ -1,9 +1,9 @@
 require 'rails_helper'
 
-RSpec.describe "Stores", type: :request do
-  describe "GET /stores" do
+RSpec.describe "StockItems", type: :request do
+  describe "GET /stock_items" do
     it "works! (now write some real specs)" do
-      get api_v1_stores_path
+      get api_v1_stock_items_path
       expect(response).to have_http_status(200)
     end
   end

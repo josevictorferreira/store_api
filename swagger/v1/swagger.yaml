@@ -132,6 +132,174 @@ paths:
       responses:
         '204':
           description: product deleted
+  "/api/v1/stock_items":
+    get:
+      summary: List all stock_items
+      tags:
+      - Stock Items
+      responses:
+        '200':
+          description: stock items found
+    post:
+      summary: Creates a stock item
+      tags:
+      - Stock Items
+      parameters:
+      - name: stock_item
+        in: body
+        schema:
+          type: object
+          properties:
+            product_id:
+              type: integer
+              example: 1
+            store_id:
+              type: integer
+              example: 1
+            items:
+              type: integer
+              example: 5
+              default: 0
+          required:
+          - product_id
+          - store_id
+      responses:
+        '201':
+          description: stock item created
+        '422':
+          description: invalid request
+  "/api/v1/stock_items/{id}":
+    get:
+      summary: Retrieves a stock item
+      tags:
+      - Stock Items
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      responses:
+        '200':
+          description: stock item found
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              product_id:
+                type: integer
+              store_id:
+                type: integer
+              items:
+                type: integer
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - product_id
+            - store_id
+            - items
+            - created_at
+            - updated_at
+  "/api/v1/stock_items/{id}/add_items":
+    put:
+      summary: Add items to a Stock Item
+      tags:
+      - Stock Items
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: stock_item
+        in: body
+        schema:
+          type: object
+          properties:
+            items:
+              type: integer
+              example: 3
+          required:
+          - items
+      responses:
+        '200':
+          description: stock item updated
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              product_id:
+                type: integer
+              store_id:
+                type: integer
+              items:
+                type: integer
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - product_id
+            - store_id
+            - items
+            - created_at
+            - updated_at
+        '422':
+          description: error adding stock item
+  "/api/v1/stock_items/{id}/remove_items":
+    put:
+      summary: Remove items from a Stock Item
+      tags:
+      - Stock Items
+      parameters:
+      - name: id
+        in: path
+        schema:
+          type: integer
+        required: true
+      - name: stock_item
+        in: body
+        schema:
+          type: object
+          properties:
+            items:
+              type: integer
+              example: 3
+          required:
+          - items
+      responses:
+        '200':
+          description: stock item updated
+          schema:
+            type: object
+            properties:
+              id:
+                type: integer
+              product_id:
+                type: integer
+              store_id:
+                type: integer
+              items:
+                type: integer
+              created_at:
+                type: string
+              updated_at:
+                type: string
+            required:
+            - id
+            - product_id
+            - store_id
+            - items
+            - created_at
+            - updated_at
+        '422':
+          description: error removing stock item
   "/api/v1/stores":
     get:
       summary: List all stores

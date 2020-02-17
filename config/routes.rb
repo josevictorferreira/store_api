@@ -5,6 +5,12 @@ Rails.application.routes.draw do
     namespace 'v1' do
       resources :products
       resources :stores
+      resources :stock_items, only: [:create, :index, :show] do
+        member do
+          put 'add_items', to: 'stock_items#add_items'
+          put 'remove_items', to: 'stock_items#remove_items'
+        end
+      end
     end
   end
 end
