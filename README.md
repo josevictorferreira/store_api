@@ -1,24 +1,24 @@
-# README
+# Store API
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+Pequena API para gerenciar o estoque de produtos de uma ou várias lojas.
 
-Things you may want to cover:
 
-* Ruby version
+### Instalação para desenvolvimento local
 
-* System dependencies
+  - Certifique-se de que possua Docker e Docker-Compose instalados na sua máquina.
+  - Na raiz do projeto execute o seguinte comando `make run`.
+  - Acesse `http://localhost:3000/api-docs` e cheque se aplicação está funcionando.
+  - Para rodar os testes unitários da aplicação execute `make unit`.
 
-* Configuration
+### Ambiente produtivo
 
-* Database creation
+  - Aplicação rodando no heroku: https://store-api-victor.herokuapp.com/
 
-* Database initialization
+### Documentação da API
 
-* How to run the test suite
+  - Acesse https://store-api-victor.herokuapp.com/api-docs/index.html
 
-* Services (job queues, cache servers, search engines, etc.)
+### To Do
 
-* Deployment instructions
-
-* ...
+  - [ ] Aprimorar a funcionalidade de adicionar e remove itens do estoque, cenário de concorrência.
+  - [ ] Melhorar a descrição dos métodos no swagger.
